@@ -8,11 +8,32 @@ app.use(express.json());
 app.use(cors());
 //
 const Tutor = require("./DataSchema/TutorSchema");
+const User=require("./DataSchema/UserSchema");
+const user = require("./DataSchema/UserSchema");
 //
 mongoose.connect(process.env.MONGOOSE_URI).then(() => {
   console.log("database connected");
 });
-
+app.post("/saveUser", async(req,res)=>{
+  const userData=new User({
+    email:req.body.email,
+    userType:req.body.userType
+  })
+  try {
+    await userData.save()
+    console.log("new user inserted")
+  } catch (error) {
+    console.log(error)
+  }
+})
+app.get("/getUserType", async(req,res)=>{
+  try {
+    const user=await User.findOne({email:req.body.email})
+    res.send(user.userType)
+  } catch (error) {
+    console.log(error);
+  }
+})
 app.post("/saveTutorData", async (req, res) => {
   console.log(req.body)
   // const sampleData={
@@ -39,14 +60,17 @@ app.post("/saveTutorData", async (req, res) => {
   });
   try {
     await tutorData.save();
-    console.log("tutor data inserted");
+    console.log("tutor data inserted"); 
     res.send("done");
   } catch (err) {
     console.log(err);
   }
 });
 
-app.get("/", (req, res) => {});
+app.get("/getAllTutors", async(req, res) => {
+  const tutorsList = await Tutor.find();
+  res.send(tutorsList)
+});
 
 const port = process.env.PORT || 4000;
 

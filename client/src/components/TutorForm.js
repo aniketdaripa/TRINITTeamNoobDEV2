@@ -114,6 +114,9 @@ export default function TutorForm() {
       url: "http://localhost:4000/saveTutorData",
       data: tutorData,
     });
+    if(res.data==="done"){
+      window.location.reload(false);
+    }
   }
   return (
     <>
