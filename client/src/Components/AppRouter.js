@@ -14,6 +14,7 @@ import Login from "../Pages/Authentication/Login";
 import Register from "../Pages/Authentication/Register";
 import ForgotPassword from "../Pages/Authentication/ForgotPassword";
 import ResetPassword from "../Pages/Authentication/ResetPassword";
+import StudentPage from "../Components/StudentPage"
 
 export default function AppRouter() {
   return (
@@ -25,6 +26,7 @@ export default function AppRouter() {
         <Route path="/register" element={<Register />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
+        <Route path="/studentPage" element={<StudentPage />} />
 
         <Route element={<ProtectedRoutes />}>
           <Route path="/home" element={<Thome />} />

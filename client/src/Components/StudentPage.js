@@ -3,7 +3,7 @@ import axios from "axios";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import TutorCard from "../components/TutorCard";
+import TutorCard from "../Components/TutorCard";
 const StudentPage = () => {
   const [tutorsList, setTutorsList] = useState([]);
   const [filter, setFilter] = useState({
