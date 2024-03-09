@@ -14,6 +14,7 @@ mongoose.connect(process.env.MONGOOSE_URI).then(() => {
 });
 
 app.post("/saveTutorData", async (req, res) => {
+  console.log(req.body)
   // const sampleData={
   //   name:"abc",
   //   email:"abc@gmail.com",
