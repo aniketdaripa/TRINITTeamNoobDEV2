@@ -15,6 +15,8 @@ mongoose.connect(process.env.MONGOOSE_URI).then(() => {
   console.log("database connected");
 });
 app.post("/saveUser", async(req,res)=>{
+  console.log(req.body)
+
   const userData=new User({
     email:req.body.email,
     userType:req.body.userType
@@ -26,9 +28,11 @@ app.post("/saveUser", async(req,res)=>{
     console.log(error)
   }
 })
-app.get("/getUserType", async(req,res)=>{
+app.get("/getUserType", async(req,res)=>{ 
   try {
-    const user=await User.findOne({email:req.body.email})
+    console.log(req.query.email)
+    const user=await User.findOne({email:req.query.email})
+    // console.log(user)
     res.send(user.userType)
   } catch (error) {
     console.log(error);

@@ -5,7 +5,7 @@ import { LoadingButton } from "@mui/lab";
 import { useAuth } from "../../Context/AuthContext";
 import Toast from "../../Components/Toast";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 export default function Register() {
   const navigate = useNavigate();
 
@@ -35,11 +35,12 @@ export default function Register() {
       console.log(email, password, userType);
       setIsSubmitting(true);
       register(email, password)
-        .then((res) => {
+        .then(async(res) => {
           setToastMessage("Student Registered Successfully!!");
           setToastType("success");
           setOpen(true);
           navigate("/login");
+          axios.post("http://localhost:4000/saveUser", {email:email, userType:userType})
         })
         .catch((error) => {
           console.log(error.message);

@@ -6,6 +6,7 @@ import { LoadingButton } from "@mui/lab";
 import { useAuth } from "../../Context/AuthContext";
 import Toast from "../../Components/Toast";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -39,7 +40,15 @@ export default function Login() {
       login(email, password)
         .then((res) => {
           localStorage.setItem("user", email);
-          navigate("/home");
+         
+        axios.get("http://localhost:4000/getUserType", {params:{email:email}}).then((data)=>{
+          console.log(data)
+          if(data.userType==="tutor"){
+            navigate("/home")
+          }else{
+            navigate("/home")
+          }
+        })
         })
         .catch((error) => {
           console.log(error.message);
